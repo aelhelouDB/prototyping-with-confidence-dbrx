@@ -2,7 +2,7 @@
 
 Interactive workshop for learning Databricks Model Context Protocol (MCP) with hands-on examples covering managed servers, external integrations, local IDE setup, and custom server development.
 
-## 🎓 Workshop Participant Setup (Recommended)
+## 🎓 Workshop Participant Setup
 
 **For workshop participants** - Get your own isolated environment with one command:
 
