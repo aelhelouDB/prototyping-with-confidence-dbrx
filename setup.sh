@@ -96,6 +96,8 @@ test_databricks_connection() {
             return 0
         else
             print_error "Failed to connect to Databricks with profile '$profile'"
+            print_info "Your OAuth credentials may have expired."
+            print_info "Run: databricks auth login --profile $profile"
             return 1
         fi
     else
