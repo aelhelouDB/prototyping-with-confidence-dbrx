@@ -208,12 +208,25 @@ install_dependencies() {
         print_status "Terraform found in virtual environment"
     fi
 
-    # Verify Databricks CLI
+    # Verify Databricks CLI (must be modern CLI, not old Python version)
     if ! command -v databricks &> /dev/null; then
-        print_error "Databricks CLI installation failed"
+        print_error "Databricks CLI not found"
+        print_info "Install from: https://docs.databricks.com/dev-tools/cli/install.html"
         exit 1
     else
         DATABRICKS_VERSION=$(databricks --version 2>/dev/null || echo "unknown")
+        
+        # Check if it's the modern CLI (v0.200+) vs old Python CLI (v0.18.x)
+        if [[ "$DATABRICKS_VERSION" =~ "0.18" ]] || [[ "$DATABRICKS_VERSION" =~ "0.17" ]]; then
+            print_error "Found old Python-based Databricks CLI: $DATABRICKS_VERSION"
+            print_warning "The old CLI is deprecated and won't work with this workshop"
+            print_info "Please install the modern Databricks CLI from:"
+            print_info "  https://docs.databricks.com/dev-tools/cli/install.html"
+            print_info ""
+            print_info "If using Homebrew: brew tap databricks/tap && brew install databricks"
+            exit 1
+        fi
+        
         print_status "Databricks CLI found: $DATABRICKS_VERSION"
     fi
 

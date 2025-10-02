@@ -1,6 +1,8 @@
 # Databricks MCP Workshop Dependencies
-# Core Databricks tools
-databricks-cli>=0.18.0
+# NOTE: Databricks CLI should be installed separately via:
+#   - macOS/Linux: https://docs.databricks.com/dev-tools/cli/install.html
+#   - The setup script expects the modern CLI (v0.200+) to be available in PATH
+#   - DO NOT install databricks-cli via pip as it's the deprecated Python version
 
 # Development and testing tools
 python-terraform>=0.10.1
