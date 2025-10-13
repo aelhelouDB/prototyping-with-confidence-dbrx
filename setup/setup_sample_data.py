@@ -16,6 +16,11 @@
 # MAGIC catalog_name = dbutils.widgets.get("catalog_name") if "dbutils" in globals() else "mcp_workshop"
 # MAGIC 
 # MAGIC print(f"Setting up sample data in catalog: {catalog_name}")
+# MAGIC 
+# MAGIC # Set the catalog context
+# MAGIC spark.sql(f"USE CATALOG {catalog_name}")
+# MAGIC spark.sql(f"USE SCHEMA default")
+# MAGIC print(f"✅ Using catalog: {catalog_name}.default")
 
 # COMMAND ----------
 
