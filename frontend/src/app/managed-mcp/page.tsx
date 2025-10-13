@@ -3,6 +3,9 @@ import CodeBlock from "@/components/CodeBlock";
 import InfoBox from "@/components/InfoBox";
 
 export default function ManagedMcpPage() {
+  // Use the workshop catalog configured during setup, or show placeholder if not set
+  const workshopCatalog = process.env.NEXT_PUBLIC_WORKSHOP_CATALOG || 'mcp_workshop_<your_prefix>';
+  
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-5xl mx-auto px-8 py-12">
@@ -115,7 +118,7 @@ export default function ManagedMcpPage() {
             <InfoBox type="success" title="Workshop Setup Complete! ✓">
               <p className="mb-3">If you've already run <code className="bg-emerald-100 px-2 py-1 rounded text-emerald-900 font-mono">./setup.sh</code>, your workshop environment is ready! The setup script has:</p>
               <ul className="space-y-2 ml-4">
-                <li>• Created your personalized catalog: <code className="bg-emerald-100 px-2 py-1 rounded text-emerald-900 font-mono">mcp_workshop_&lt;your_prefix&gt;</code></li>
+                <li>• Created your personalized catalog: <code className="bg-emerald-100 px-2 py-1 rounded text-emerald-900 font-mono">{workshopCatalog}</code></li>
                 <li>• Loaded sample e-commerce data (products, customers, sales)</li>
                 <li>• Deployed your Databricks App and MCP server</li>
               </ul>
@@ -244,7 +247,7 @@ export default function ManagedMcpPage() {
               <CodeBlock
                 language="sql"
                 title="Customer Order History Function"
-                code={`CREATE OR REPLACE FUNCTION mcp_workshop_<your_prefix>.default.get_customer_orders(
+                code={`CREATE OR REPLACE FUNCTION ${workshopCatalog}.default.get_customer_orders(
   input_customer_id STRING COMMENT 'The customer ID to look up (format: C0001, C0002, etc.)'
 )
 RETURNS TABLE
@@ -258,8 +261,8 @@ RETURN
     s.quantity,
     s.revenue,
     ROUND(s.revenue / s.quantity, 2) as unit_price
-  FROM mcp_workshop_<your_prefix>.default.sales s
-  JOIN mcp_workshop_<your_prefix>.default.products p ON s.product_id = p.product_id
+  FROM ${workshopCatalog}.default.sales s
+  JOIN ${workshopCatalog}.default.products p ON s.product_id = p.product_id
   WHERE s.customer_id = input_customer_id
   ORDER BY s.sale_date DESC;`}
               />
@@ -274,7 +277,7 @@ RETURN
               <CodeBlock
                 language="sql"
                 title="Product Performance Function"
-                code={`CREATE OR REPLACE FUNCTION mcp_workshop_<your_prefix>.default.get_product_performance(
+                code={`CREATE OR REPLACE FUNCTION ${workshopCatalog}.default.get_product_performance(
   input_category STRING DEFAULT NULL COMMENT 'Optional: Filter by product category (Electronics, Clothing, Books, etc.). Leave NULL for all categories.'
 )
 RETURNS TABLE
@@ -290,8 +293,8 @@ RETURN
     SUM(s.revenue) as total_revenue,
     AVG(s.revenue / s.quantity) as avg_selling_price,
     ROUND((AVG(s.revenue / s.quantity) - p.price) / p.price * 100, 2) as price_variance_pct
-  FROM mcp_workshop_<your_prefix>.default.products p
-  LEFT JOIN mcp_workshop_<your_prefix>.default.sales s ON p.product_id = s.product_id
+  FROM ${workshopCatalog}.default.products p
+  LEFT JOIN ${workshopCatalog}.default.sales s ON p.product_id = s.product_id
   WHERE input_category IS NULL OR p.category = input_category
   GROUP BY p.product_id, p.product_name, p.category, p.price
   ORDER BY total_revenue DESC NULLS LAST;`}
@@ -306,7 +309,7 @@ RETURN
               <CodeBlock
                 language="sql"
                 title="Regional Sales Summary Function"
-                code={`CREATE OR REPLACE FUNCTION mcp_workshop_<your_prefix>.default.get_regional_sales(
+                code={`CREATE OR REPLACE FUNCTION ${workshopCatalog}.default.get_regional_sales(
   input_region STRING DEFAULT NULL COMMENT 'Optional: Filter by region (North, South, East, West). Leave NULL for all regions.'
 )
 RETURNS TABLE
@@ -319,8 +322,8 @@ RETURN
     SUM(s.revenue) as total_revenue,
     AVG(s.revenue) as avg_order_value,
     SUM(s.quantity) as total_items_sold
-  FROM mcp_workshop_<your_prefix>.default.customers c
-  LEFT JOIN mcp_workshop_<your_prefix>.default.sales s ON c.customer_id = s.customer_id
+  FROM ${workshopCatalog}.default.customers c
+  LEFT JOIN ${workshopCatalog}.default.sales s ON c.customer_id = s.customer_id
   WHERE input_region IS NULL OR c.region = input_region
   GROUP BY c.region
   ORDER BY total_revenue DESC NULLS LAST;`}
@@ -335,7 +338,7 @@ RETURN
               <CodeBlock
                 language="sql"
                 title="Customer Insights Function"
-                code={`CREATE OR REPLACE FUNCTION mcp_workshop_<your_prefix>.default.get_customer_insights(
+                code={`CREATE OR REPLACE FUNCTION ${workshopCatalog}.default.get_customer_insights(
   input_customer_id STRING COMMENT 'The customer ID to analyze (format: C0001, C0002, etc.)'
 )
 RETURNS TABLE
@@ -353,9 +356,9 @@ RETURN
     MAX(s.sale_date) as last_purchase_date,
     DATEDIFF(CURRENT_DATE(), MAX(s.sale_date)) as days_since_last_purchase,
     COUNT(DISTINCT p.category) as categories_purchased
-  FROM mcp_workshop_<your_prefix>.default.customers c
-  LEFT JOIN mcp_workshop_<your_prefix>.default.sales s ON c.customer_id = s.customer_id
-  LEFT JOIN mcp_workshop_<your_prefix>.default.products p ON s.product_id = p.product_id
+  FROM ${workshopCatalog}.default.customers c
+  LEFT JOIN ${workshopCatalog}.default.sales s ON c.customer_id = s.customer_id
+  LEFT JOIN ${workshopCatalog}.default.products p ON s.product_id = p.product_id
   WHERE c.customer_id = input_customer_id
   GROUP BY c.customer_id, c.customer_name, c.email, c.region, c.signup_date;`}
               />
@@ -364,7 +367,7 @@ RETURN
             <InfoBox type="success" title="Functions Created! 🎉">
               <p className="mb-3">Your Unity Catalog functions are now available as MCP tools at:</p>
               <code className="block p-3 bg-emerald-100 rounded-lg text-emerald-900 font-mono text-sm">
-                https://&lt;workspace-hostname&gt;/api/2.0/mcp/functions/mcp_workshop_&lt;your_prefix&gt;/default
+                https://&lt;workspace-hostname&gt;/api/2.0/mcp/functions/{workshopCatalog}/default
               </code>
               <p className="mt-4 text-sm">These functions will automatically appear as available tools when you connect an AI agent to this MCP endpoint.</p>
               <div className="mt-4 pt-4 border-t border-emerald-200">
@@ -405,7 +408,7 @@ RETURN
                       select your entire schema to add all four functions at once:
                     </p>
                     <code className="block p-3 bg-white rounded-lg text-slate-800 font-mono text-sm border border-blue-200">
-                      mcp_workshop_&lt;your_prefix&gt;.default
+                      {workshopCatalog}.default
                     </code>
                     <p className="text-sm text-slate-600 mt-2">
                       This will automatically add all functions in the schema as available tools for the LLM to use.
@@ -569,15 +572,15 @@ RETURN
                 <ul className="ml-11 space-y-2">
                   <li className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 bg-slate-400 rounded-full"></span>
-                    <code className="bg-slate-200 px-2 py-1 rounded text-slate-800 text-sm">mcp_workshop_&lt;your_prefix&gt;.default.products</code>
+                    <code className="bg-slate-200 px-2 py-1 rounded text-slate-800 text-sm">{workshopCatalog}.default.products</code>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 bg-slate-400 rounded-full"></span>
-                    <code className="bg-slate-200 px-2 py-1 rounded text-slate-800 text-sm">mcp_workshop_&lt;your_prefix&gt;.default.customers</code>
+                    <code className="bg-slate-200 px-2 py-1 rounded text-slate-800 text-sm">{workshopCatalog}.default.customers</code>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 bg-slate-400 rounded-full"></span>
-                    <code className="bg-slate-200 px-2 py-1 rounded text-slate-800 text-sm">mcp_workshop_&lt;your_prefix&gt;.default.sales</code>
+                    <code className="bg-slate-200 px-2 py-1 rounded text-slate-800 text-sm">{workshopCatalog}.default.sales</code>
                   </li>
                 </ul>
               </div>
@@ -677,10 +680,10 @@ Common questions users might ask:
                     Click <strong>Tools → + Add tool</strong> and select <strong>Hosted Function</strong>. Add your personalized functions:
                   </p>
                   <ul className="text-sm text-slate-600 space-y-1 ml-4">
-                    <li>• <code>mcp_workshop_&lt;your_prefix&gt;.default.get_customer_orders</code></li>
-                    <li>• <code>mcp_workshop_&lt;your_prefix&gt;.default.get_product_performance</code></li>
-                    <li>• <code>mcp_workshop_&lt;your_prefix&gt;.default.get_regional_sales</code></li>
-                    <li>• <code>mcp_workshop_&lt;your_prefix&gt;.default.get_customer_insights</code></li>
+                    <li>• <code>{workshopCatalog}.default.get_customer_orders</code></li>
+                    <li>• <code>{workshopCatalog}.default.get_product_performance</code></li>
+                    <li>• <code>{workshopCatalog}.default.get_regional_sales</code></li>
+                    <li>• <code>{workshopCatalog}.default.get_customer_insights</code></li>
                   </ul>
                 </div>
 
