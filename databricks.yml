@@ -8,10 +8,6 @@ variables:
     description: "Name of the MCP workshop"
     default: "Databricks MCP Workshop"
 
-  app_name:
-    description: "Name of the Databricks App"
-    default: "mcp-workshop-app"
-
   participant_prefix:
     description: "Participant prefix for resource naming"
     default: "default"
@@ -20,40 +16,17 @@ variables:
     description: "Workshop catalog name"
     default: "mcp_workshop"
 
-  mcp_server_name:
-    description: "Custom MCP server name"
-    default: "databricks-mcp-workshop"
-
 targets:
   # Development target for testing
   dev:
     mode: development
     default: true
-    variables:
-      app_name: "mcp-workshop-app-dev"
     
   # Production target for workshop deployment
   prod:
     mode: production
-    variables:
-      app_name: "mcp-workshop-app"
 
 resources:
-  # Databricks Apps for the workshop
-  apps:
-    # Custom MCP server for hands-on learning
-    mcp_server_app:
-      name: ${var.mcp_server_name}
-      description: "Custom MCP server for workshop participant: ${var.participant_prefix}"
-
-      # Custom MCP server code
-      source_code_path: "/Workspace/Users/${workspace.current_user.userName}/${var.mcp_server_name}"
-
-      # Permissions - participant-specific
-      permissions:
-        - level: CAN_USE
-          group_name: "users"
-
   # Jobs for workshop setup and teardown
   jobs:
     setup_workshop_resources:
@@ -74,15 +47,6 @@ resources:
             notebook_path: "./setup/setup_sample_data.py"
             base_parameters:
               catalog_name: "${var.workshop_catalog}"
-
-        - task_key: "deploy_mcp_template"
-          depends_on:
-            - task_key: "setup_sample_data"
-          notebook_task:
-            notebook_path: "./setup/deploy_mcp_template.py"
-            base_parameters:
-              participant_prefix: "${var.participant_prefix}"
-              mcp_server_name: "${var.mcp_server_name}"
 
     cleanup_workshop_resources:
       name: "Cleanup MCP Workshop Resources"

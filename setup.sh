@@ -427,14 +427,12 @@ main() {
 
     # Create user-specific resource names
     WORKSHOP_CATALOG="mcp_workshop_${CLEAN_PREFIX}"
-    MCP_SERVER_NAME="databricks-mcp-${CLEAN_PREFIX}"
 
     # Update configuration
     update_env_value "PARTICIPANT_NAME" "$PARTICIPANT_NAME" "Workshop participant information"
     update_env_value "PARTICIPANT_PREFIX" "$CLEAN_PREFIX"
     update_env_value "WORKSHOP_CATALOG" "$WORKSHOP_CATALOG" "Workshop resources"
     update_env_value "WORKSHOP_APP_NAME" "$WORKSHOP_APP_NAME"
-    update_env_value "MCP_SERVER_NAME" "$MCP_SERVER_NAME"
 
     print_status "Configuration saved to .env.local"
 
@@ -445,7 +443,6 @@ PARTICIPANT_NAME="${PARTICIPANT_NAME}"
 PARTICIPANT_PREFIX="${CLEAN_PREFIX}"
 WORKSHOP_CATALOG="${WORKSHOP_CATALOG}"
 WORKSHOP_APP_NAME="${WORKSHOP_APP_NAME}"
-MCP_SERVER_NAME="${MCP_SERVER_NAME}"
 CREATED_DATE="$(date)"
 EOF
 
@@ -506,8 +503,7 @@ EOF
         
         if databricks bundle deploy -t dev --profile "$DATABRICKS_CONFIG_PROFILE" \
             --var="participant_prefix=${CLEAN_PREFIX}" \
-            --var="workshop_catalog=${WORKSHOP_CATALOG}" \
-            --var="mcp_server_name=${MCP_SERVER_NAME}"; then
+            --var="workshop_catalog=${WORKSHOP_CATALOG}"; then
             print_status "Bundle deployed successfully"
         else
             print_error "Bundle deployment failed with profile authentication"
@@ -523,8 +519,7 @@ EOF
         # Use PAT authentication (default)
         if databricks bundle deploy -t dev \
             --var="participant_prefix=${CLEAN_PREFIX}" \
-            --var="workshop_catalog=${WORKSHOP_CATALOG}" \
-            --var="mcp_server_name=${MCP_SERVER_NAME}"; then
+            --var="workshop_catalog=${WORKSHOP_CATALOG}"; then
             print_status "Bundle deployed successfully"
         else
             print_error "Bundle deployment failed with PAT authentication"
@@ -572,9 +567,11 @@ EOF
     if [ -d "custom-mcp-template" ]; then
         cd custom-mcp-template
 
-        # Run the MCP-specific setup
-        if [ -f "setup_workshop_mcp.sh" ]; then
-            print_progress "Configuring custom MCP server template..."
+        # Create workshop-specific configuration
+        print_progress "Creating workshop configuration..."
+        
+        # Create .env.local for the MCP template
+        if [ ! -f ".env.local" ]; then
             # Ensure DATABRICKS_HOST is available
             if [ -z "$DATABRICKS_HOST" ]; then
                 source ../.env.local 2>/dev/null || true
@@ -609,24 +606,23 @@ EOF
                 fi
                 export DATABRICKS_HOST
             fi
-            print_info "Parameters: ${CLEAN_PREFIX}, ${MCP_SERVER_NAME}, ${DATABRICKS_HOST}"
-            ./setup_workshop_mcp.sh "${CLEAN_PREFIX}" "${MCP_SERVER_NAME}" "${DATABRICKS_HOST}"
-            print_status "Custom MCP server template configured"
-        else
-            print_warning "MCP setup script not found, setting up manually..."
-
-            # Manual setup fallback
-            cat > config.yaml << EOF
-# MCP Server Configuration for ${PARTICIPANT_NAME}
-servername: ${MCP_SERVER_NAME}
-EOF
-
+            
+            # Create .env.local with workshop variables
             cat > .env.local << EOF
-# Workshop MCP Server Configuration for ${PARTICIPANT_NAME}
+# Workshop MCP Server Configuration
+# Generated for: ${PARTICIPANT_NAME}
 DATABRICKS_HOST=${DATABRICKS_HOST}
-SERVER_NAME=${MCP_SERVER_NAME}
+DATABRICKS_TOKEN=${DATABRICKS_TOKEN}
 EOF
-            print_status "Basic MCP configuration created"
+            print_status "Created .env.local configuration"
+        fi
+        
+        # Install dependencies
+        print_progress "Installing MCP server dependencies..."
+        if command -v uv &> /dev/null; then
+            uv sync --quiet || print_warning "uv sync encountered issues (non-fatal)"
+        else
+            print_warning "uv not found - dependencies will be installed on first run"
         fi
 
         cd ..
@@ -658,13 +654,11 @@ EOF
     echo ""
     echo -e "${CYAN}📋 Your Workshop Resources:${NC}"
     echo "   • Catalog: ${WORKSHOP_CATALOG}"
-    echo "   • MCP Server App: ${MCP_SERVER_NAME}"
     echo ""
     echo -e "${CYAN}🚀 Next Steps:${NC}"
     echo "   1. Start the frontend: cd frontend && npm run dev"
     echo "   2. Visit: http://localhost:3000"
-    echo "   3. Your MCP Server App will be available shortly at:"
-    echo "      (check Databricks Apps page for: ${MCP_SERVER_NAME})"
+    echo "   3. Follow the workshop to deploy your custom MCP server"
     echo ""
     echo -e "${CYAN}🔧 Configuration Files Created:${NC}"
     echo "   • .env.local - Your workshop configuration"

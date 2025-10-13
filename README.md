@@ -58,11 +58,11 @@ Integrate third-party services:
 
 ### Section 4: Custom MCP Servers (60 min)
 Build and deploy your own:
-- MCP server development patterns
-- Business logic implementation
-- **Databricks Apps deployment**
-- Tools, resources, and prompts
-- End-to-end testing
+- Simple `@mcp.tool()` decorator pattern (based on [databrickslabs/mcp](https://github.com/databrickslabs/mcp))
+- Databricks SDK integration (clusters, warehouses, SQL)
+- Markdown-based prompts for reusable commands
+- **Databricks Apps deployment** with automated scripts
+- End-to-end testing and debugging tools
 
 ## 🔐 Authentication Model
 
@@ -224,6 +224,39 @@ databricks apps list | grep "mcp-workshop-app-"
 - Review [Databricks Apps documentation](https://docs.databricks.com/aws/en/dev-tools/databricks-apps/)
 - For participant setup issues, see [WORKSHOP_SETUP.md](./WORKSHOP_SETUP.md)
 - Submit issues to the workshop repository
+
+## 🔀 Choosing Your MCP Approach
+
+This workshop uses a simplified approach based on **[databrickslabs/mcp](https://github.com/databrickslabs/mcp)** - perfect for learning MCP fundamentals.
+
+### This Workshop: databrickslabs/mcp
+✅ **Simpler structure** - fewer files, easier to understand  
+✅ **Focus on tool creation** - `@mcp.tool()` decorator pattern  
+✅ **Officially supported** - maintained by Databricks Labs  
+✅ **Quick deployment** - streamlined for Databricks Apps  
+
+### Alternative: databricks-solutions Repository
+
+For **Claude Code/Cursor users** wanting enhanced IDE integration:
+
+**[databricks-solutions/custom-mcp-databricks-app](https://github.com/databricks-solutions/custom-mcp-databricks-app)**
+
+Features:
+- Enhanced IDE integration (Claude Code, Cursor)
+- `.claude/commands` directory support
+- FastMCP framework with routers
+- Built-in MCP inspector
+- More production-ready patterns
+
+**💡 Recommendation:** Start with this workshop to learn the fundamentals. If you're a heavy Claude Code or Cursor user, explore the databricks-solutions repository as your next step!
+
+## 📖 Additional Resources
+
+- [databrickslabs/mcp Repository](https://github.com/databrickslabs/mcp) - Official examples
+- [Databricks MCP Documentation](https://docs.databricks.com/mcp)
+- [Model Context Protocol Specification](https://modelcontextprotocol.io)
+- [Databricks Apps Guide](https://docs.databricks.com/dev-tools/databricks-apps)
+- [FastMCP Documentation](https://fastmcp.org/)
 
 ## 📄 License
 

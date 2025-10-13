@@ -13,750 +13,750 @@ export default function CustomMcpPage() {
               🛠️
             </div>
             <div>
-              <h1 className="text-5xl font-bold text-slate-900 mb-2">Hands-On: Custom MCP Server</h1>
-              <p className="text-xl text-slate-600">Build your own SQL-powered MCP server right here!</p>
+              <h1 className="text-5xl font-bold text-slate-900 mb-2">Build Your Custom MCP Server</h1>
+              <p className="text-xl text-slate-600">Start with a clean databrickslabs/mcp template</p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl p-8 border-2 border-orange-100 mb-8">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">✨ Workshop Setup Complete!</h2>
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 border-2 border-green-200 mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">✨ What You're Building</h2>
             <p className="text-lg text-slate-700 leading-relaxed mb-4">
-              Your workshop setup (<code className="bg-orange-200 px-1.5 py-0.5 rounded font-mono">./setup.sh</code>) has already:
+              Your workshop setup created <code className="bg-green-200 px-1.5 py-0.5 rounded font-mono">custom-mcp-template/</code> - a clean MCP server 
+              based on <a href="https://github.com/databrickslabs/mcp" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-semibold">databrickslabs/mcp</a>.
+              You'll learn to extend it with Databricks capabilities!
             </p>
             <ul className="space-y-2 text-slate-700">
-              <li>• ✅ Configured a custom MCP server template in <code className="bg-orange-200 px-1.5 py-0.5 rounded font-mono">custom-mcp-template/</code></li>
-              <li>• ✅ Set up your personalized MCP server name and configuration</li>
-              <li>• ✅ Deployed your Databricks App with the MCP template</li>
-              <li>• ✅ Installed dependencies (uv, bun, Python packages)</li>
+              <li>• 📦 <strong>Already set up for you</strong> - ready to explore and modify</li>
+              <li>• 🎯 Uses simple <code className="bg-green-100 px-1 py-0.5 rounded text-sm">@mcp.tool()</code> decorator pattern</li>
+              <li>• 🚀 Includes everything needed for Databricks Apps deployment</li>
+              <li>• 🔨 You'll add Databricks SDK features in this workshop!</li>
             </ul>
           </div>
 
-          {/* IDE Requirements */}
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border-2 border-blue-200 mb-8">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">💻 MCP-Compatible IDE Required</h2>
-            <p className="text-slate-700 mb-4">
-              To use your custom MCP server with AI assistance, you'll need an <strong>MCP-compatible IDE</strong>. 
-              Currently supported:
-            </p>
-            
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <div className="bg-white rounded-lg p-4 border border-blue-200">
-                <h3 className="font-bold text-slate-900 mb-2">✅ Cursor IDE</h3>
-                <p className="text-sm text-slate-600 mb-2">Full MCP support with <code className="bg-slate-200 px-1 py-0.5 rounded text-xs">mcp.json</code> configuration</p>
-                <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">→ Download Cursor</a>
-              </div>
-              
-              <div className="bg-white rounded-lg p-4 border border-blue-200">
-                <h3 className="font-bold text-slate-900 mb-2">✅ Claude Code</h3>
-                <p className="text-sm text-slate-600 mb-2">Native MCP support with CLI integration</p>
-                <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">→ Download Claude Code</a>
-              </div>
-            </div>
-
-            <InfoBox type="warning" title="Note about VS Code">
-              <p className="text-sm">VS Code does <strong>not yet have native MCP support</strong>. Use Cursor (VS Code fork with MCP) or Claude Code for this workshop.</p>
-            </InfoBox>
-          </div>
-
-          <InfoBox type="success" title="🎉 What's Already Set Up">
-            <ul className="space-y-2 mt-3">
-              <li>• ✅ Custom MCP server template in <code className="bg-emerald-100 px-1.5 py-0.5 rounded font-mono">custom-mcp-template/</code></li>
-              <li>• ✅ Your personal Databricks App deployed and running</li>
-              <li>• ✅ Local development environment with hot-reload</li>
-              <li>• ✅ SQL warehouse connection configured</li>
-              <li>• ✅ Sample workshop data (products, customers, sales)</li>
-              <li>• ⚡ Ready to build your own Databricks MCP tools!</li>
-            </ul>
+          <InfoBox type="info" title="Learning by Doing">
+            <p>This workshop teaches you to build MCP servers by <strong>starting simple and adding features incrementally</strong>. 
+            You'll understand not just what each piece does, but WHY it's there and how to customize it for your needs.</p>
           </InfoBox>
         </div>
 
-        <WorkshopStep number={1} title="What's Already Done">
+        <WorkshopStep number={1} title="Understand Your MCP Server Structure">
           <div className="space-y-6">
             <p className="text-lg text-slate-700 leading-relaxed">
-              Your workshop <code className="bg-orange-200 px-1.5 py-0.5 rounded font-mono">./setup.sh</code> already created the MCP template for you in <code className="bg-orange-200 px-1.5 py-0.5 rounded font-mono">custom-mcp-template/</code>
+              The workshop setup created <code className="bg-orange-200 px-1.5 py-0.5 rounded font-mono">custom-mcp-template/</code> for you. 
+              Let's understand what each file does and how they work together:
             </p>
 
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">✅ What setup.sh Did</h3>
-              <ul className="space-y-2 text-slate-700">
-                <li>• Created the custom-mcp-template folder with all the code</li>
-                <li>• Set up your personalized server name in <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">config.yaml</code></li>
-                <li>• Configured authentication in <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">.env.local</code></li>
-                <li>• Installed dependencies (uv, Python packages)</li>
+            <div className="bg-blue-50 rounded-lg p-4 border border-blue-200 mb-4">
+              <p className="text-sm text-slate-700">
+                <strong>💡 Pro Tip:</strong> Open the <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">custom-mcp-template/</code> folder 
+                in your code editor while following along. You'll be editing these files!
+              </p>
+            </div>
+
+            <CodeBlock
+              language="bash"
+              title="Project Structure"
+              code={`custom-mcp-template/
+├── src/
+│   └── custom_server/
+│       ├── app.py              # Main MCP server file
+│       ├── main.py             # Entry point for local dev
+│       ├── __init__.py
+│       └── static/
+│           └── index.html      # Landing page
+├── hooks/
+│   └── apps_build.py           # Databricks Apps build hook
+├── app.yaml                    # App configuration
+├── databricks.yml              # Bundle configuration
+├── pyproject.toml              # Python dependencies
+└── README.md                   # Documentation`}
+            />
+
+            <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">🎯 Key Files You'll Modify</h3>
+              <div className="space-y-4 text-slate-700">
+                <div>
+                  <p className="font-bold">src/custom_server/app.py</p>
+                  <p className="text-sm">This is YOUR canvas! Add MCP tools here using the <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">@mcp.tool()</code> decorator. 
+                  Each tool becomes callable by AI assistants connected to your server.</p>
+                </div>
+                <div>
+                  <p className="font-bold">pyproject.toml</p>
+                  <p className="text-sm">Manages Python dependencies. When you need new libraries (like <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">databricks-sdk</code>), 
+                  you'll add them here.</p>
+                </div>
+                <div>
+                  <p className="font-bold">databricks.yml</p>
+                  <p className="text-sm">Tells Databricks how to deploy your MCP server as an App. You'll customize the app name and settings here.</p>
+                </div>
+                <div>
+                  <p className="font-bold">app.yaml</p>
+                  <p className="text-sm">Specifies the command that runs your server inside the Databricks App container.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </WorkshopStep>
+
+        <WorkshopStep number={2} title="Examine the Simple MCP Server">
+          <div className="space-y-6">
+            <p className="text-lg text-slate-700 leading-relaxed">
+              Open <code className="bg-orange-200 px-1.5 py-0.5 rounded font-mono">custom-mcp-template/src/custom_server/app.py</code> and you'll see a clean, minimal MCP server:
+            </p>
+
+            <CodeBlock
+              language="python"
+              title="src/custom_server/app.py - Current State"
+              code={`from pathlib import Path
+from mcp.server.fastmcp import FastMCP
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
+
+STATIC_DIR = Path(__file__).parent / "static"
+
+# Create an MCP server
+mcp = FastMCP("Custom MCP Server on Databricks Apps")
+
+
+# Add an addition tool
+@mcp.tool()
+def add(a: int, b: int) -> int:
+    """Add two numbers"""
+    return a + b
+
+
+# Add a dynamic greeting resource
+@mcp.resource("greeting://{name}")
+def get_greeting(name: str) -> str:
+    """Get a personalized greeting"""
+    return f"Hello, {name}!"
+
+
+mcp_app = mcp.streamable_http_app()
+
+app = FastAPI(
+    lifespan=lambda _: mcp.session_manager.run(),
+)
+
+
+@app.get("/", include_in_schema=False)
+async def serve_index():
+    return FileResponse(STATIC_DIR / "index.html")
+
+
+app.mount("/", mcp_app)`}
+            />
+
+            <div className="bg-purple-50 rounded-xl p-6 border-2 border-purple-200">
+              <h3 className="text-lg font-bold text-slate-900 mb-3">📚 Understanding the Code</h3>
+              <ul className="space-y-2 text-sm text-slate-700">
+                <li>• <code className="bg-purple-100 px-1 py-0.5 rounded text-xs">FastMCP(...)</code> creates the MCP server instance</li>
+                <li>• <code className="bg-purple-100 px-1 py-0.5 rounded text-xs">@mcp.tool()</code> decorator registers a callable tool</li>
+                <li>• <code className="bg-purple-100 px-1 py-0.5 rounded text-xs">@mcp.resource(...)</code> registers dynamic resources</li>
+                <li>• <code className="bg-purple-100 px-1 py-0.5 rounded text-xs">mcp.streamable_http_app()</code> creates HTTP transport</li>
+                <li>• FastAPI app mounts the MCP app and serves static files</li>
               </ul>
             </div>
+          </div>
+        </WorkshopStep>
 
-            <div className="bg-yellow-50 rounded-xl p-6 border-2 border-yellow-200">
-              <h4 className="text-lg font-bold text-slate-900 mb-3">📹 Watch This 10-Minute Video</h4>
-              <p className="text-slate-700 mb-3">
-                This shows the exact workflow we'll follow to deploy and use your MCP server:
+        <WorkshopStep number={3} title="Run Locally">
+          <div className="space-y-6">
+            <p className="text-lg text-slate-700 leading-relaxed">
+              Let's run the MCP server locally to see it in action. We'll use <code className="bg-orange-100 px-1 py-0.5 rounded text-sm">uv</code> to manage dependencies and run the server.
+            </p>
+
+            <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+              <h3 className="text-lg font-bold text-slate-900 mb-3">📦 First Time? Install UV</h3>
+              <p className="text-sm text-slate-700 mb-3">
+                If you don't have <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">uv</code> installed yet, run one of these:
               </p>
-              <a 
-                href="https://www.youtube.com/watch?v=oKE59zgb6e0" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors font-semibold"
-              >
-                <span>▶️</span>
-                Databricks MCP Server Setup & Usage
-              </a>
+              <CodeBlock
+                language="bash"
+                code={`# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# or via Homebrew
+brew install uv
+
+# or via pip
+pip install uv`}
+              />
+              <details className="mt-3">
+                <summary className="cursor-pointer text-sm font-semibold text-slate-700 hover:text-slate-900">
+                  What is UV? (click to expand)
+                </summary>
+                <div className="mt-2 text-sm text-slate-600 space-y-2">
+                  <p>
+                    UV is a fast Python package manager (like pip + virtualenv, but way faster). 
+                    It handles dependencies and environments automatically.
+                  </p>
+                  <ul className="ml-4 space-y-1">
+                    <li>• <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">uv sync</code> creates <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">.venv</code> and installs dependencies</li>
+                    <li>• <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">uv run</code> runs commands in that environment (no manual activation!)</li>
+                  </ul>
+                </div>
+              </details>
             </div>
 
-            <InfoBox type="info" title="What We'll Do Next">
-              <ol className="space-y-2 ml-4">
-                <li>1. Use Claude Code's <code className="bg-blue-100 px-1 py-0.5 rounded font-mono">/setup-mcp</code> command to deploy your server</li>
-                <li>2. Explore existing prompts in the <code className="bg-blue-100 px-1 py-0.5 rounded font-mono">prompts/</code> folder</li>
-                <li>3. Create a new custom prompt for managing DLT pipelines</li>
-                <li>4. Test it in Claude Code</li>
-                <li>5. Share it with your team</li>
-              </ol>
+            <CodeBlock
+              language="bash"
+              title="Local Development"
+              code={`# Navigate to the template directory
+cd custom-mcp-template
+
+# Install dependencies (creates .venv virtual environment)
+uv sync
+
+# Start the server (with hot-reload)
+uv run uvicorn custom_server.app:app --reload --host 0.0.0.0 --port 8000`}
+            />
+
+            <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+              <p className="text-sm font-semibold text-slate-900 mb-2">✅ Success looks like this:</p>
+              <CodeBlock
+                language="text"
+                code={`✅ Loaded prompt: analyze_workspace
+✅ Loaded prompt: check_clusters
+✅ Loaded prompt: query_workshop_data
+📋 Loaded 3 prompt(s) from .../prompts
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process`}
+              />
+            </div>
+
+            <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+              <p className="text-sm text-slate-700">
+                <strong>💡 Why <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">uv run</code>?</strong> It automatically uses the virtual environment created by <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">uv sync</code>. 
+                No need to manually activate it!
+              </p>
+            </div>
+
+            <InfoBox type="success" title="Test It Out">
+              <p className="mb-2">Open <strong>http://localhost:8000</strong> in your browser to see the landing page.</p>
+              <p className="text-sm">The MCP endpoint at <code className="bg-emerald-100 px-1 py-0.5 rounded text-xs">/mcp/</code> is ready to accept MCP protocol requests!</p>
             </InfoBox>
           </div>
         </WorkshopStep>
 
-        <WorkshopStep number={2} title="Deploy Your MCP Server with Claude Code">
+        <WorkshopStep number={4} title="Deploy to Databricks Apps">
           <div className="space-y-6">
             <p className="text-lg text-slate-700 leading-relaxed">
-              Now let's deploy your MCP server to Databricks Apps using Claude Code's <strong>automated setup</strong>. 
-              Claude will handle authentication, deployment, and configuration for you!
+              Now let's deploy this clean MCP server to Databricks Apps using the bundle:
+            </p>
+
+            <CodeBlock
+              language="bash"
+              title="Deploy with Databricks Bundle"
+              code={`# Make sure you're authenticated
+databricks auth login --profile your-profile
+
+# Build the wheel
+uv build --wheel
+
+# Deploy using bundle
+databricks bundle deploy
+
+# Start the app
+databricks bundle run custom-mcp-server
+
+# Your app will be available at:
+# https://your-app.databricksapps.com/`}
+            />
+
+            <div className="bg-yellow-50 rounded-xl p-6 border-2 border-yellow-200">
+              <h3 className="text-lg font-bold text-slate-900 mb-3">🔧 What Just Happened?</h3>
+              <ol className="space-y-2 text-sm text-slate-700 ml-4">
+                <li>1. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">uv build --wheel</code> packaged your app into a Python wheel</li>
+                <li>2. The build hook (hooks/apps_build.py) created a <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">.build/</code> directory</li>
+                <li>3. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">databricks bundle deploy</code> uploaded it to Databricks</li>
+                <li>4. Your MCP server is now running as a Databricks App!</li>
+              </ol>
+            </div>
+
+            <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+              <h3 className="text-lg font-bold text-slate-900 mb-3">💡 Local vs Production: Different Commands</h3>
+              <div className="space-y-3 text-sm text-slate-700">
+                <div>
+                  <p className="font-bold">Local Development (uses UV):</p>
+                  <code className="bg-blue-100 px-2 py-1 rounded text-xs block mt-1">uv run uvicorn custom_server.app:app --reload</code>
+                  <p className="text-xs mt-1 text-slate-600">UV manages the virtual environment and dependencies for you locally.</p>
+                </div>
+                <div>
+                  <p className="font-bold">Production on Databricks Apps (no UV needed):</p>
+                  <code className="bg-blue-100 px-2 py-1 rounded text-xs block mt-1">uvicorn custom_server.app:app --host 0.0.0.0 --port 8000</code>
+                  <p className="text-xs mt-1 text-slate-600">
+                    Dependencies are already installed from the wheel. This is configured in <code className="bg-blue-50 px-1 rounded">app.yaml</code>.
+                  </p>
+                </div>
+                <div className="bg-blue-100 rounded p-3 mt-2">
+                  <p className="text-xs font-semibold">⚠️ Common Issue:</p>
+                  <p className="text-xs mt-1">
+                    If you see "uv: executable file not found", make sure <code className="bg-blue-50 px-1 rounded">app.yaml</code> uses 
+                    <code className="bg-blue-50 px-1 rounded ml-1">uvicorn</code> directly, not <code className="bg-blue-50 px-1 rounded">uv run</code>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </WorkshopStep>
+
+        <WorkshopStep number={5} title="Add Your First Databricks SDK Tool">
+          <div className="space-y-6">
+            <p className="text-lg text-slate-700 leading-relaxed">
+              Now let's make this MCP server actually useful by connecting it to Databricks! We'll add tools that can list clusters, query data, and more.
             </p>
 
             <div className="bg-purple-50 rounded-xl p-6 border-2 border-purple-200">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">📋 What You'll Need</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">🎯 What You'll Learn</h3>
               <ul className="space-y-2 text-slate-700">
-                <li>• ✅ Your Databricks workspace URL (e.g., <code className="bg-purple-100 px-1.5 py-0.5 rounded text-sm">https://your-workspace.cloud.databricks.com</code>)</li>
-                <li>• ✅ A Personal Access Token (PAT) from your workspace</li>
-                <li>• ✅ Claude Code installed with terminal access</li>
+                <li>• How to add the Databricks SDK as a dependency</li>
+                <li>• The pattern for creating MCP tools that call Databricks APIs</li>
+                <li>• How authentication works (spoiler: it's automatic in Databricks Apps!)</li>
+                <li>• Best practices for tool design: clear names, good docstrings, error handling</li>
               </ul>
-              <div className="mt-4 p-4 bg-white rounded-lg border border-purple-200">
-                <p className="text-sm text-slate-700"><strong>Get your PAT:</strong> In Databricks → Settings → Developer → Access Tokens → Generate New Token</p>
-              </div>
             </div>
 
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Step 1: Open Your Template in Claude Code</h3>
-              <CodeBlock
-                language="bash"
-                title="Terminal Commands"
-                code={`# Navigate to your MCP template
-cd custom-mcp-template
-
-# Open Claude Code in this directory
-claude
-
-# Pro tip: Use --dangerously-skip-permissions for faster demo
-# (but you don't have to - it just speeds things up)`}
-              />
-            </div>
-
-            <div className="border-2 border-green-200 rounded-xl p-6 bg-green-50">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Step 2: Run the Setup Command</h3>
-              <p className="text-slate-700 mb-4">
-                In Claude Code, type this slash command and press Enter:
-              </p>
-              <div className="bg-white rounded-lg p-4 border-2 border-green-300 font-mono text-lg text-center mb-4">
-                /setup-mcp
-              </div>
-              
-              <div className="bg-emerald-100 rounded-lg p-4 border border-emerald-300">
-                <p className="text-sm font-bold text-emerald-900 mb-2">✨ What Claude Does Automatically:</p>
-                <ol className="text-sm text-emerald-800 space-y-1 ml-4">
-                  <li>1. Checks your environment (fresh setup or continuing)</li>
-                  <li>2. Asks for your Databricks workspace URL → <em className="text-emerald-700">paste yours</em></li>
-                  <li>3. Asks for your Personal Access Token → <em className="text-emerald-700">paste your PAT</em></li>
-                  <li>4. Asks for app name → <em className="text-emerald-700">type a name or use existing</em></li>
-                  <li>5. Installs all dependencies (Python, bun, etc.)</li>
-                  <li>6. Deploys your MCP server to Databricks Apps</li>
-                  <li>7. Adds the MCP server to your Claude CLI automatically</li>
-                </ol>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Step 3: Wait for Deployment</h3>
-              <p className="text-slate-700 mb-4">
-                Claude will deploy your app and verify everything works. This takes about 2-3 minutes.
-              </p>
-              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                <p className="text-sm text-blue-900 mb-2"><strong>💡 While you wait:</strong></p>
-                <p className="text-sm text-blue-800">You can check your app status in Databricks → Apps → <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">your-app-name</code></p>
-              </div>
-            </div>
-
-            <InfoBox type="success" title="🎉 Setup Complete!">
-              <p className="mb-3">Once Claude finishes, you'll see a success message. Your MCP server is now:</p>
-              <ul className="space-y-2 ml-4">
-                <li>• ✅ Running as a Databricks App</li>
-                <li>• ✅ Connected to Claude Code via local proxy</li>
-                <li>• ✅ Ready to use with custom prompts!</li>
-              </ul>
-              <p className="mt-4 text-sm">
-                <strong>Next:</strong> Let's explore the prompts that are now available and create our own!
-              </p>
-            </InfoBox>
-          </div>
-        </WorkshopStep>
-
-        <WorkshopStep number={3} title="Explore the Prompts Folder">
-          <div className="space-y-6">
-            <p className="text-lg text-slate-700 leading-relaxed">
-              Let's understand <strong>how custom prompts work</strong> in your MCP server. 
-              Prompts are reusable "slash commands" that you can share with your team!
+            <h3 className="text-xl font-bold text-slate-900">Step 1: Add the Databricks SDK Dependency</h3>
+            <p className="text-slate-700">
+              Open <code className="bg-orange-200 px-1.5 py-0.5 rounded font-mono">pyproject.toml</code> and add <code className="bg-orange-100 px-1 py-0.5 rounded text-sm">databricks-sdk</code> to the dependencies:
             </p>
 
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-200">
-              <h3 className="text-lg font-bold text-slate-900 mb-3">🎯 What Are Prompts?</h3>
-              <p className="text-slate-700 mb-3">
-                <strong>Prompts</strong> are markdown files that give Claude pre-written instructions for common tasks. Think of them like:
+            <CodeBlock
+              language="toml"
+              title="pyproject.toml - Add this line"
+              code={`[project]
+name = "custom-server"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.12",
+    "mcp[cli]>=1.10.0",
+    "uvicorn>=0.34.2",
+    "databricks-sdk>=0.42.0",  # ← Add this!
+]`}
+            />
+
+            <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+              <p className="text-sm text-slate-700">
+                <strong>💡 Why this matters:</strong> The Databricks SDK provides Python methods for every Databricks API. 
+                Instead of making raw HTTP requests, you can just call <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">w.clusters.list()</code> or 
+                <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">w.warehouses.get()</code>. Much easier!
               </p>
-              <ul className="space-y-2 text-slate-700 ml-4">
-                <li>• 📝 <strong>Reusable templates</strong> - Write once, use many times</li>
-                <li>• 🎯 <strong>Team standards</strong> - Everyone uses the same workflow</li>
-                <li>• 🚀 <strong>Quick shortcuts</strong> - Type <code className="bg-purple-100 px-1 py-0.5 rounded text-sm">/your-server:prompt-name</code> instead of explaining from scratch</li>
+            </div>
+
+            <h3 className="text-xl font-bold text-slate-900 mt-8">Step 2: Add Authentication Helper</h3>
+            <p className="text-slate-700">
+              In <code className="bg-orange-200 px-1.5 py-0.5 rounded font-mono">src/custom_server/app.py</code>, add this helper function at the top:
+            </p>
+
+            <CodeBlock
+              language="python"
+              title="src/custom_server/app.py - Add after imports"
+              code={`import os
+from databricks.sdk import WorkspaceClient
+
+def get_workspace_client() -> WorkspaceClient:
+    """Get an authenticated Databricks workspace client.
+    
+    This uses environment variables or Databricks Apps authentication.
+    In Databricks Apps, authentication is handled automatically!
+    """
+    return WorkspaceClient(
+        host=os.environ.get('DATABRICKS_HOST'),
+        token=os.environ.get('DATABRICKS_TOKEN')
+    )`}
+            />
+
+            <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+              <p className="text-sm text-slate-700 mb-2">
+                <strong>🔐 Authentication Magic:</strong>
+              </p>
+              <ul className="text-sm text-slate-700 space-y-1 ml-4">
+                <li>• <strong>In Databricks Apps:</strong> Environment variables are set automatically - no config needed!</li>
+                <li>• <strong>Local development:</strong> Set DATABRICKS_HOST and DATABRICKS_TOKEN in your terminal</li>
+                <li>• <strong>The SDK handles:</strong> Token refresh, retries, rate limiting - all transparent to you</li>
               </ul>
             </div>
 
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Check Your Prompts Folder</h3>
-              <CodeBlock
-                language="bash"
-                title="Look at Existing Prompts"
-                code={`cd custom-mcp-template/prompts/
-ls -la
+            <h3 className="text-xl font-bold text-slate-900 mt-8">Step 3: Add Your First Databricks Tool</h3>
+            <p className="text-slate-700">
+              Now add a tool that lists clusters. Add this to your app.py:
+            </p>
 
-# You should see:
-# check_system.md
-# list_files.md  
-# ping_google.md
-# dba.md
+            <CodeBlock
+              language="python"
+              title="src/custom_server/app.py - Add this tool"
+              code={`@mcp.tool()
+def list_clusters(status: str = "RUNNING") -> dict:
+    """List Databricks compute clusters filtered by status.
+    
+    Args:
+        status: Filter by cluster state (RUNNING, TERMINATED, PENDING, etc.)
+    
+    Returns:
+        Dictionary with cluster information including ID, name, state, and specs
+    
+    Example:
+        list_clusters("RUNNING") -> Shows all currently running clusters
+    """
+    try:
+        w = get_workspace_client()
+        clusters = []
+        
+        for cluster in w.clusters.list():
+            if cluster.state and cluster.state.name == status:
+                clusters.append({
+                    "id": cluster.cluster_id,
+                    "name": cluster.cluster_name,
+                    "state": cluster.state.name,
+                    "spark_version": cluster.spark_version,
+                    "node_type": cluster.node_type_id,
+                })
+        
+        return {
+            "success": True,
+            "clusters": clusters,
+            "count": len(clusters),
+            "message": f"Found {len(clusters)} cluster(s) with status {status}"
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e)}`}
+            />
 
-# Let's look at one:
-cat ping_google.md`}
-              />
-            </div>
-
-            <div className="bg-white rounded-lg p-5 border-2 border-slate-200">
-              <h4 className="font-bold text-slate-900 mb-3">Example Prompt: ping_google.md</h4>
-              <CodeBlock
-                language="markdown"
-                title="prompts/ping_google.md"
-                code={`# Ping Google
-
-Test network connectivity by pinging google.com.
-
-- Check if your system can reach google.com
-- Show network latency`}
-              />
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Test a Prompt in Claude Code</h3>
-              <p className="text-slate-700 mb-4">
-                Open a new Claude Code window and try one of your prompts:
-              </p>
-              <CodeBlock
-                language="bash"
-                title="In Claude Code"
-                code={`# Type this (replace 'your-server-name' with your actual server name):
-/your-server-name:ping_google
-
-# Claude will execute the prompt and show you the results!`}
-              />
-              <div className="bg-green-50 rounded-lg p-4 border border-green-200 mt-4">
-                <p className="text-sm text-green-900">
-                  <strong>✨ What just happened:</strong> Claude read the <code className="bg-green-100 px-1 py-0.5 rounded text-xs">ping_google.md</code> file 
-                  from your MCP server and followed those instructions automatically!
-                </p>
+            <div className="bg-yellow-50 rounded-xl p-6 border-2 border-yellow-200">
+              <h3 className="text-lg font-bold text-slate-900 mb-3">🎓 Breaking Down This Pattern</h3>
+              <div className="space-y-3 text-sm text-slate-700">
+                <div>
+                  <p className="font-bold">@mcp.tool() decorator</p>
+                  <p>Tells FastMCP "this function is a tool that AI assistants can call"</p>
+                </div>
+                <div>
+                  <p className="font-bold">Detailed docstring</p>
+                  <p>The AI sees this! It helps the AI understand WHEN and HOW to use your tool. Be descriptive!</p>
+                </div>
+                <div>
+                  <p className="font-bold">Type hints (status: str, {'->'} dict)</p>
+                  <p>MCP uses these to validate inputs and describe outputs. Always include them!</p>
+                </div>
+                <div>
+                  <p className="font-bold">Try/except error handling</p>
+                  <p>Returns <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">{`{"success": false, "error": "..."}`}</code> instead of crashing. The AI can handle errors gracefully.</p>
+                </div>
+                <div>
+                  <p className="font-bold">Structured return data</p>
+                  <p>Returns dictionaries with clear fields. Makes it easy for AI to parse and present results.</p>
+                </div>
               </div>
             </div>
 
-            <InfoBox type="success" title="Key Takeaway">
-              <p>Prompts in the <code className="bg-emerald-100 px-1 py-0.5 rounded font-mono">prompts/</code> folder automatically become slash commands that anyone with access to your MCP server can use!</p>
-              <p className="mt-3 text-sm">
-                <strong>Next:</strong> Let's create our own custom prompt for managing DLT pipelines.
-              </p>
+            <h3 className="text-xl font-bold text-slate-900 mt-8">Step 4: Test Your Tool Locally</h3>
+            
+            <CodeBlock
+              language="bash"
+              title="Terminal - Test your new tool"
+              code={`# Install the new dependency
+cd custom-mcp-template
+uv sync
+
+# Set environment variables for local testing
+export DATABRICKS_HOST="https://your-workspace.cloud.databricks.com"
+export DATABRICKS_TOKEN="your-pat-token"
+
+# Start the server (uv run uses the .venv automatically)
+uv run uvicorn custom_server.app:app --reload --host 0.0.0.0 --port 8000
+
+# In another terminal, test with curl
+curl -X POST http://localhost:8000/mcp/tools/call \\
+  -H "Content-Type: application/json" \\
+  -d '{"name": "list_clusters", "arguments": {"status": "RUNNING"}}'`}
+            />
+
+            <InfoBox type="success" title="You Did It!">
+              <p className="mb-2">You just created a Databricks-powered MCP tool! This tool can now be called by:</p>
+              <ul className="space-y-1 ml-4 text-sm">
+                <li>• Claude Desktop (when connected to your MCP server)</li>
+                <li>• Cursor IDE (with MCP configuration)</li>
+                <li>• Any MCP-compatible AI assistant</li>
+                <li>• Your own Python scripts using the MCP client library</li>
+              </ul>
             </InfoBox>
           </div>
         </WorkshopStep>
 
-        <WorkshopStep number={4} title="Test Your MCP Server Locally">
-          <p className="text-lg text-slate-700 leading-relaxed mb-6">
-            Let's start your custom MCP server locally and test that your new tools work with
-            your workshop data.
-          </p>
+        <WorkshopStep number={6} title="Add More Useful Tools">
+          <div className="space-y-6">
+            <p className="text-lg text-slate-700 leading-relaxed">
+              Now that you understand the pattern, let's add two more powerful tools: one to list SQL warehouses and another to execute SQL queries.
+            </p>
 
-          <CodeBlock
-            language="bash"
-            title="Start Your MCP Server"
-            code={`# Navigate to your MCP template directory
-cd custom-mcp-template
+            <h3 className="text-xl font-bold text-slate-900">Tool 2: List SQL Warehouses</h3>
 
-# Start the development server (this includes hot-reload!)
-./watch.sh
+            <CodeBlock
+              language="python"
+              title="src/custom_server/app.py - Add this tool"
+              code={`@mcp.tool()
+def list_warehouses() -> dict:
+    """List all SQL warehouses in the Databricks workspace.
+    
+    Returns:
+        Dictionary with warehouse information including ID, name, state, size, and type
+    
+    Example:
+        list_warehouses() -> Shows all SQL warehouses in your workspace
+    """
+    try:
+        w = get_workspace_client()
+        warehouses = []
+        
+        for warehouse in w.warehouses.list():
+            warehouses.append({
+                'id': warehouse.id,
+                'name': warehouse.name,
+                'state': warehouse.state.value if warehouse.state else 'UNKNOWN',
+                'size': warehouse.cluster_size,
+                'type': warehouse.warehouse_type.value if warehouse.warehouse_type else 'UNKNOWN',
+            })
+        
+        return {
+            'success': True,
+            'warehouses': warehouses,
+            'count': len(warehouses),
+            'message': f'Found {len(warehouses)} SQL warehouse(s)'
+        }
+    except Exception as e:
+        return {'success': False, 'error': str(e)}`}
+            />
 
-# Your server will be available at:
-# - HTTP homepage: http://localhost:8000
-# - MCP endpoint: http://localhost:8000/mcp/`}
-          />
+            <h3 className="text-xl font-bold text-slate-900 mt-8">Tool 3: Execute SQL Queries</h3>
+            <p className="text-slate-700 mb-4">
+              This is the most powerful tool - it lets AI assistants query your data!
+            </p>
 
-          <CodeBlock
-            language="bash"
-            title="Test Your New Sales Tool"
-            code={`# Test that your tools are available
-curl -X POST http://localhost:8000/mcp/ \\
-  -H "Content-Type: application/json" \\
-  -d '{"jsonrpc": "2.0", "id": "test", "method": "tools/list"}'
+            <CodeBlock
+              language="python"
+              title="src/custom_server/app.py - Add this tool"
+              code={`@mcp.tool()
+def execute_dbsql(
+    query: str,
+    warehouse_id: str = None,
+    limit: int = 100,
+) -> dict:
+    """Execute a SQL query on a Databricks SQL warehouse.
+    
+    Args:
+        query: SQL query to execute (e.g., "SELECT * FROM main.default.sales LIMIT 10")
+        warehouse_id: SQL warehouse ID (uses DATABRICKS_SQL_WAREHOUSE_ID env var if not provided)
+        limit: Maximum rows to return (default: 100)
+    
+    Returns:
+        Dictionary with query results including columns and rows
+    
+    Example:
+        execute_dbsql("SHOW DATABASES", warehouse_id="abc123def456")
+    """
+    try:
+        w = get_workspace_client()
+        
+        # Get warehouse ID from parameter or environment variable
+        warehouse_id = warehouse_id or os.environ.get('DATABRICKS_SQL_WAREHOUSE_ID')
+        if not warehouse_id:
+            return {
+                'success': False,
+                'error': 'No SQL warehouse ID provided. Set DATABRICKS_SQL_WAREHOUSE_ID environment variable or pass warehouse_id parameter.'
+            }
+        
+        # Execute the query
+        result = w.statement_execution.execute_statement(
+            warehouse_id=warehouse_id,
+            statement=query,
+            wait_timeout='30s'
+        )
+        
+        # Process results
+        if result.result and result.result.data_array:
+            columns = [col.name for col in result.manifest.schema.columns]
+            data = []
+            
+            for row in result.result.data_array[:limit]:
+                row_dict = {}
+                for i, col in enumerate(columns):
+                    row_dict[col] = row[i]
+                data.append(row_dict)
+            
+            return {
+                'success': True,
+                'data': {'columns': columns, 'rows': data},
+                'row_count': len(data)
+            }
+        else:
+            return {
+                'success': True,
+                'data': {'message': 'Query executed successfully with no results'},
+                'row_count': 0
+            }
+    except Exception as e:
+        return {'success': False, 'error': str(e)}`}
+            />
 
-# Test your custom sales tool
-curl -X POST http://localhost:8000/mcp/ \\
-  -H "Content-Type: application/json" \\
-  -d '{"jsonrpc": "2.0", "id": "test", "method": "tools/call", "params": {"name": "get_daily_sales_summary", "arguments": {"limit": 5}}}'`}
-          />
-
-          <InfoBox type="success" title="🎉 Your MCP Server is Running!">
-            If you see your sales data in the response, congratulations! Your custom MCP server
-            is successfully querying your workshop data.
-          </InfoBox>
+            <div className="bg-red-50 rounded-xl p-6 border-2 border-red-200">
+              <h3 className="text-lg font-bold text-red-900 mb-3">⚠️ Security Note: SQL Tool Design</h3>
+              <p className="text-sm text-slate-700 mb-3">
+                Notice how this tool is designed with safety in mind:
+              </p>
+              <ul className="space-y-2 text-sm text-slate-700">
+                <li>• <strong>Row limit:</strong> Default limit of 100 rows prevents accidentally returning huge datasets</li>
+                <li>• <strong>Timeout:</strong> 30-second timeout prevents queries from running forever</li>
+                <li>• <strong>Error handling:</strong> Returns errors as structured data instead of crashing</li>
+                <li>• <strong>Unity Catalog permissions:</strong> The query respects the user's existing Databricks permissions</li>
+              </ul>
+              <p className="text-sm text-slate-700 mt-3">
+                <strong>Pro tip:</strong> In production, consider adding query validation, logging, and rate limiting!
+              </p>
+            </div>
+          </div>
         </WorkshopStep>
 
-        <WorkshopStep number={5} title="Deploy to Databricks Apps">
-          <p className="text-lg text-slate-700 leading-relaxed mb-6">
-            Deploy your MCP server as a production Databricks App with OAuth authentication
-            and automatic scaling.
-          </p>
+        <WorkshopStep number={7} title="Deploy to Databricks Apps">
+          <div className="space-y-6">
+            <p className="text-lg text-slate-700 leading-relaxed">
+              Now let's deploy your MCP server so your team can use it! The template includes helper scripts that make deployment simple.
+            </p>
 
-          <CodeBlock
-            language="bash"
-            title="Production Deployment"
-            code={`# Deploy to Databricks Apps
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-200">
+              <h3 className="text-xl font-bold text-slate-900 mb-3">🎯 What Deployment Does</h3>
+              <ul className="space-y-2 text-slate-700">
+                <li>• Packages your MCP server into a Python wheel</li>
+                <li>• Uploads it to Databricks using the bundle CLI</li>
+                <li>• Creates a Databricks App that runs 24/7</li>
+                <li>• Provides a public HTTPS endpoint for AI assistants to connect</li>
+              </ul>
+            </div>
+
+            <h3 className="text-xl font-bold text-slate-900">Step 1: Deploy with One Command</h3>
+
+            <CodeBlock
+              language="bash"
+              title="Terminal - Deploy your MCP server"
+              code={`cd custom-mcp-template
+
+# Run the deployment script
 ./deploy.sh
 
-# Check deployment status and get your app URL
-./app_status.sh
+# What it does:
+# 1. Builds Python wheel with uv
+# 2. Runs databricks bundle deploy
+# 3. Shows you the results`}
+            />
 
-# Example output:
-# App Status: RUNNING
-# App URL: https://your-app-abc123.databricksapps.com
-# MCP Endpoint: https://your-app-abc123.databricksapps.com/mcp/`}
-          />
+            <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+              <p className="text-sm text-slate-700">
+                <strong>⏱️ First deployment:</strong> Takes about 2-3 minutes. Subsequent deployments are faster (~30 seconds) because only changed files are uploaded.
+              </p>
+            </div>
 
-          <InfoBox type="success" title="Production Ready">
-            Your MCP server is now running with OAuth authentication, automatic SSL,
-            and enterprise-grade security provided by Databricks Apps.
-          </InfoBox>
+            <h3 className="text-xl font-bold text-slate-900 mt-8">Step 2: Check Your App Status</h3>
+
+            <CodeBlock
+              language="bash"
+              title="Terminal - Check deployment status"
+              code={`./app_status.sh
+
+# Output shows:
+# ✅ App found!
+# 📍 App Name: mcp-custom-server-bundles
+# 🔄 State: RUNNING
+# 🌐 URL: https://your-app.databricksapps.com
+# 🔗 MCP Endpoint: https://your-app.databricksapps.com/mcp/`}
+            />
+
+            <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+              <p className="text-sm text-slate-700">
+                <strong>🔗 Save that MCP endpoint URL!</strong> You'll use it to connect AI assistants like Claude Desktop, Cursor IDE, or custom Python scripts.
+              </p>
+            </div>
+
+            <h3 className="text-xl font-bold text-slate-900 mt-8">Step 3: Verify It's Running</h3>
+
+            <CodeBlock
+              language="bash"
+              title="Terminal - Test the endpoint"
+              code={`# Test that your MCP server responds
+curl https://your-app.databricksapps.com/
+
+# You should see the landing page HTML`}
+            />
+
+            <InfoBox type="success" title="🎉 Your MCP Server is Live!">
+              <p className="mb-2">Your MCP server is now:</p>
+              <ul className="space-y-1 ml-4 text-sm">
+                <li>• ✅ Running 24/7 on Databricks infrastructure</li>
+                <li>• ✅ Secured with automatic HTTPS</li>
+                <li>• ✅ Using Databricks Apps authentication</li>
+                <li>• ✅ Ready to connect to AI assistants</li>
+              </ul>
+            </InfoBox>
+          </div>
         </WorkshopStep>
 
-        <WorkshopStep number={6} title="Use Your Tool: Create a Pipeline with AI">
+        <WorkshopStep number={8} title="What You Built">
           <div className="space-y-6">
             <p className="text-lg text-slate-700 leading-relaxed">
-              Now comes the magic! Let's use your MCP tool with AI to actually create a DLT pipeline. 
-              First, we'll create a simple DLT notebook, then ask AI to create a pipeline for it.
+              Congratulations! You've built a production-ready MCP server. Let's recap what you learned:
             </p>
 
-            {/* Create DLT Notebook */}
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Step 1: Create a Sample DLT Notebook</h3>
-              <p className="text-slate-700 mb-4">
-                In your Databricks workspace, create a new notebook with this DLT transformation code:
-              </p>
-              <CodeBlock
-                language="python"
-                title="Create: /Users/<your-email>/workshop_sales_transformation"
-                code={`import dlt
-from pyspark.sql.functions import col, sum as _sum, count, round as _round
-
-# Get the workshop catalog from environment or use default
-import os
-workshop_catalog = os.environ.get("WORKSHOP_CATALOG", "mcp_workshop_yourname")
-
-@dlt.table(
-  name="sales_by_category",
-  comment="Daily sales aggregated by product category"
-)
-def sales_by_category():
-  """Aggregate daily sales by product category."""
-  return (
-    dlt.read(f"{workshop_catalog}.default.sales")
-      .join(
-        dlt.read(f"{workshop_catalog}.default.products"),
-        on="product_id"
-      )
-      .groupBy("sale_date", "category")
-      .agg(
-        count("sale_id").alias("total_orders"),
-        _sum("quantity").alias("total_units"),
-        _round(_sum("revenue"), 2).alias("total_revenue")
-      )
-      .orderBy("sale_date", "category")
-  )
-
-@dlt.table(
-  name="customer_lifetime_value",
-  comment="Customer lifetime value and purchase metrics"
-)
-def customer_lifetime_value():
-  """Calculate customer lifetime value metrics."""
-  return (
-    dlt.read(f"{workshop_catalog}.default.sales")
-      .join(
-        dlt.read(f"{workshop_catalog}.default.customers"),
-        on="customer_id"
-      )
-      .groupBy("customer_id", "customer_name", "region")
-      .agg(
-        count("sale_id").alias("total_orders"),
-        _sum("revenue").alias("lifetime_value"),
-        _round(_sum("revenue") / count("sale_id"), 2).alias("avg_order_value")
-      )
-      .orderBy(col("lifetime_value").desc())
-  )`}
-              />
-              <InfoBox type="info" title="What This Notebook Does">
-                <p className="text-sm">Creates two analytics tables: one tracking sales by category over time, and another calculating customer lifetime value. This is typical data engineering work!</p>
-              </InfoBox>
-            </div>
-
-            {/* Use AI to Create Pipeline */}
-            <div className="border-2 border-green-200 rounded-xl p-6 bg-green-50">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Step 2: Ask AI to Create the Pipeline</h3>
-              <p className="text-slate-700 mb-4">
-                Now open Cursor or Claude Code and use your MCP tool with this prompt:
-              </p>
-              
-              <div className="bg-white rounded-lg p-5 border-2 border-green-300 mb-4">
-                <p className="font-mono text-sm text-slate-800 mb-3">💬 <strong>Your Prompt to AI:</strong></p>
-                <div className="bg-slate-50 rounded p-4 border border-slate-200">
-                  <p className="text-sm text-slate-700">
-                    "Use the create_dlt_pipeline tool to set up a data pipeline for me:
-                  </p>
-                  <ul className="text-sm text-slate-700 mt-2 ml-4 space-y-1">
-                    <li>- Pipeline name: workshop_sales_analytics</li>
-                    <li>- Notebook path: /Users/&lt;your-email&gt;/workshop_sales_transformation</li>
-                    <li>- Target catalog: mcp_workshop_&lt;your_prefix&gt;</li>
-                    <li>- Target schema: analytics</li>
-                    <li>- Cluster size: Small</li>
-                  </ul>
-                  <p className="text-sm text-slate-700 mt-2">
-                    After creating it, give me the pipeline URL so I can monitor it."
-                  </p>
-                </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-xl p-6 border-2 border-slate-200">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">✅ What You Learned</h3>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li>• The <code className="bg-slate-100 px-1 py-0.5 rounded text-xs">@mcp.tool()</code> decorator pattern</li>
+                  <li>• How to integrate Databricks SDK</li>
+                  <li className="pl-4">- execute_dbsql</li>
+                  <li className="pl-4">- list_warehouses</li>
+                  <li>✅ <strong>Step 2:</strong> Markdown prompts</li>
+                  <li>✅ <strong>Step 3:</strong> Deployment scripts</li>
+                  <li>✅ <strong>Step 4:</strong> Workshop integration</li>
+                </ul>
               </div>
 
-              <div className="bg-emerald-100 rounded-lg p-4 border border-emerald-300">
-                <p className="text-sm font-bold text-emerald-900 mb-2">🎯 What Happens:</p>
-                <ol className="text-sm text-emerald-800 space-y-1 ml-4">
-                  <li>1. AI reads your prompt and understands you want to create a DLT pipeline</li>
-                  <li>2. AI identifies the create_dlt_pipeline tool from your MCP server</li>
-                  <li>3. AI calls the tool with the parameters you specified</li>
-                  <li>4. Your MCP tool uses the Databricks SDK to create the actual pipeline</li>
-                  <li>5. AI returns the pipeline URL and success message</li>
-                </ol>
-                <p className="text-xs text-emerald-700 mt-3">
-                  ✨ You just created production data infrastructure with a conversation!
+              <div className="bg-white rounded-xl p-6 border-2 border-slate-200">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">📖 Why This Approach?</h3>
+                <p className="text-sm text-slate-700 mb-3">
+                  By starting with the <strong>clean databrickslabs template</strong>, you understand:
                 </p>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li>• The core MCP server pattern</li>
+                  <li>• How <code className="bg-slate-100 px-1 py-0.5 rounded text-xs">@mcp.tool()</code> works</li>
+                  <li>• Databricks Apps deployment basics</li>
+                  <li>• What each file does</li>
+                </ul>
               </div>
             </div>
 
-            {/* Verify the Pipeline */}
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Step 3: Verify and Run Your Pipeline</h3>
+            <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-xl p-6 border-2 border-orange-200">
+              <h3 className="text-lg font-bold text-slate-900 mb-3">🚀 Ready to Continue?</h3>
               <p className="text-slate-700 mb-4">
-                Visit the pipeline URL provided by AI, or navigate to the Pipelines page in Databricks:
+                The next steps will build on this foundation by adding Databricks SDK integration, custom prompts, and helper scripts.
               </p>
-              <CodeBlock
-                language="bash"
-                title="Pipeline Location"
-                code={`# Your pipeline is now live at:
-https://your-workspace.cloud.databricks.com/pipelines/<pipeline-id>
-
-# Or find it in the UI:
-Databricks Workspace → Workflows → Delta Live Tables → "workshop_sales_analytics"`}
-              />
-              
-              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200 mt-4">
-                <p className="text-sm font-bold text-blue-900 mb-2">🚀 Run Your Pipeline:</p>
-                <ol className="text-sm text-blue-800 space-y-2 ml-4">
-                  <li>1. Click "Start" in the pipeline UI</li>
-                  <li>2. Watch as it processes your workshop data</li>
-                  <li>3. View the generated tables: <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">mcp_workshop_yourname.analytics.sales_by_category</code></li>
-                  <li>4. Query your new analytics tables in a SQL notebook!</li>
-                </ol>
-              </div>
-            </div>
-
-            {/* The Power */}
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-200">
-              <h4 className="text-lg font-bold text-slate-900 mb-3">💡 The Power of MCP for Infrastructure</h4>
-              <div className="grid md:grid-cols-2 gap-4 text-sm">
-                <div>
-                  <p className="font-bold text-purple-900 mb-2">❌ Without MCP:</p>
-                  <ul className="text-slate-700 space-y-1 ml-4">
-                    <li>• Click through UI menus</li>
-                    <li>• Copy-paste notebook paths</li>
-                    <li>• Configure cluster settings manually</li>
-                    <li>• Takes 5-10 minutes per pipeline</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="font-bold text-green-900 mb-2">✅ With MCP:</p>
-                  <ul className="text-slate-700 space-y-1 ml-4">
-                    <li>• Describe what you want in natural language</li>
-                    <li>• AI calls your tool automatically</li>
-                    <li>• Pipeline created in seconds</li>
-                    <li>• Repeatable, documented, version-controlled!</li>
-                  </ul>
-                </div>
-              </div>
+              <p className="text-sm text-slate-600">
+                <strong>Coming up next:</strong> We'll add the Databricks SDK to query clusters, run SQL, and access Unity Catalog!
+              </p>
             </div>
           </div>
         </WorkshopStep>
 
-        <WorkshopStep number={7} title="Connect to Cursor IDE">
-          <p className="text-lg text-slate-700 leading-relaxed mb-6">
-            Integrate your custom MCP server with Cursor IDE for AI-powered development
-            workflows with your business data.
-          </p>
+        {/* Resources */}
+        <div className="mt-16 p-8 rounded-2xl border-2 border-slate-200 bg-slate-50">
+          <h3 className="text-2xl font-bold text-slate-900 mb-6">📚 Resources</h3>
 
-          <CodeBlock
-            language="bash"
-            title="Install MCP Proxy for Cursor"
-            code={`# Install the MCP proxy globally
-pip install git+https://github.com/YOUR-USERNAME/my-databricks-mcp.git
-
-# Or install with uvx for isolated execution
-uvx --from git+https://github.com/YOUR-USERNAME/my-databricks-mcp.git dba-mcp-proxy --help`}
-          />
-
-          <CodeBlock
-            language="json"
-            title="Cursor MCP Configuration (.cursor/mcp.json)"
-            code={`{
-  "mcpServers": {
-    "my-custom-databricks": {
-      "command": "uvx",
-      "args": [
-        "--from", "git+https://github.com/YOUR-USERNAME/my-databricks-mcp.git",
-        "dba-mcp-proxy",
-        "--databricks-host", "https://your-workspace.cloud.databricks.com",
-        "--databricks-app-url", "https://your-app-abc123.databricksapps.com"
-      ],
-      "env": {
-        "DATABRICKS_HOST": "https://your-workspace.cloud.databricks.com"
-      }
-    }
-  }
-}`}
-          />
-
-          <InfoBox type="tip" title="Cursor Integration">
-            After adding the configuration, restart Cursor. Your custom SQL tools will be available
-            in chat conversations, allowing AI to query your business data directly.
-          </InfoBox>
-        </WorkshopStep>
-
-        <WorkshopStep number={8} title="Use with Databricks AI Playground">
-          <p className="text-lg text-slate-700 leading-relaxed mb-6">
-            Connect your MCP server to Databricks AI Playground for interactive data analysis
-            and business intelligence workflows.
-          </p>
-
-          <CodeBlock
-            language="python"
-            title="AI Playground Integration"
-            code={`# In Databricks AI Playground, you can now reference your MCP tools:
-
-# Prompt example:
-"""
-Use my custom MCP server to analyze today's revenue performance.
-Call the get_daily_revenue tool with today's date and compare it
-to our average daily revenue over the past 30 days.
-
-Then use the analyze_customer_segments tool to see which customer
-segments are driving the most value this month.
-"""
-
-# The AI can now execute your custom SQL tools and provide insights`}
-          />
-
-          <InfoBox type="info" title="AI Playground Features">
-            <ul className="space-y-2 mt-3">
-              <li>• Natural language to SQL via your custom tools</li>
-              <li>• Real-time business metrics and KPI reporting</li>
-              <li>• Customer segmentation and behavior analysis</li>
-              <li>• Integration with existing Databricks notebooks and workflows</li>
-            </ul>
-          </InfoBox>
-        </WorkshopStep>
-
-        <WorkshopStep number={9} title="Advanced Configuration">
-          <p className="text-lg text-slate-700 leading-relaxed mb-6">
-            Configure advanced features like custom prompts, multiple warehouses,
-            and business-specific integrations.
-          </p>
-
-          <CodeBlock
-            language="markdown"
-            title="prompts/business_insights.md"
-            code={`# Business Intelligence Assistant
-
-You are a business intelligence assistant with access to our company's
-data through custom SQL tools. You can:
-
-- Analyze daily, weekly, and monthly revenue trends
-- Segment customers based on behavior and value
-- Generate executive dashboards and reports
-- Identify growth opportunities and performance gaps
-
-Use the available tools to provide data-driven insights and recommendations.
-
-Available tools:
-- get_daily_revenue: Daily revenue metrics
-- analyze_customer_segments: Customer behavior analysis
-- execute_dbsql: Custom SQL queries`}
-          />
-
-          <CodeBlock
-            language="yaml"
-            title="config.yaml - Server Configuration"
-            code={`# Custom server configuration
-servername: my-business-analytics-mcp
-
-# Additional settings for your deployment
-features:
-  - sql_tools
-  - custom_analytics
-  - business_prompts
-
-warehouse_configs:
-  default: "your-default-warehouse-id"
-  analytics: "your-analytics-warehouse-id"
-  reporting: "your-reporting-warehouse-id"`}
-          />
-        </WorkshopStep>
-
-        {/* Architecture Overview */}
-        <div className="mb-12 p-8 bg-slate-50 rounded-2xl border-2 border-slate-200">
-          <h3 className="text-2xl font-bold text-slate-900 mb-6">🏗️ Architecture Overview</h3>
-
-          <div className="bg-white p-6 rounded-lg border border-slate-200 mb-6">
-            <CodeBlock
-              language="text"
-              title="End-to-End Flow"
-              code={`┌─────────────────┐    MCP Protocol     ┌──────────────────┐    OAuth + HTTPS    ┌─────────────────────┐
-│   Cursor IDE    │ ◄─────────────────► │   MCP Proxy      │ ◄─────────────────► │  Databricks App     │
-│   AI Playground │   (stdio/JSON-RPC)  │  (Local Process) │   (Authenticated)   │  (Your MCP Server)  │
-└─────────────────┘                     └──────────────────┘                     └─────────────────────┘
-                                                │                                            │
-                                                │                                            ▼
-                                                └──────────── Databricks Auth ─────► SQL Warehouses
-                                                                                       Unity Catalog
-                                                                                       DBFS & APIs`}
-            />
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-lg border border-slate-200">
-              <h4 className="font-bold text-slate-900 mb-3">🔧 Core Components</h4>
-              <ul className="text-sm text-slate-700 space-y-2">
-                <li>• <strong>FastMCP Server:</strong> Python-based MCP implementation</li>
-                <li>• <strong>SQL Tools:</strong> Execute queries against warehouses</li>
-                <li>• <strong>OAuth Proxy:</strong> Handles Databricks authentication</li>
-                <li>• <strong>Databricks App:</strong> Managed hosting and scaling</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg border border-slate-200">
-              <h4 className="font-bold text-slate-900 mb-3">🚀 Key Features</h4>
-              <ul className="text-sm text-slate-700 space-y-2">
-                <li>• <strong>Production Ready:</strong> Enterprise authentication & security</li>
-                <li>• <strong>SQL Integration:</strong> Direct warehouse and Unity Catalog access</li>
-                <li>• <strong>Hot Reload:</strong> Development server with live updates</li>
-                <li>• <strong>Multi-Client:</strong> Works with Cursor, Claude, AI Playground</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Troubleshooting */}
-        <div className="mb-12 p-8 bg-yellow-50 rounded-2xl border-2 border-yellow-200">
-          <h3 className="text-2xl font-bold text-slate-900 mb-6">🔧 Troubleshooting</h3>
-
-          <div className="space-y-6">
-            <div>
-              <h4 className="font-bold text-slate-900 mb-2">Authentication Issues</h4>
-              <CodeBlock
-                language="bash"
-                code={`# Refresh Databricks credentials
-databricks auth login --host https://your-workspace.cloud.databricks.com
-
-# Test authentication
-databricks current-user me
-
-# Clear cached tokens if needed
-uvx cache clean`}
-              />
-            </div>
-
-            <div>
-              <h4 className="font-bold text-slate-900 mb-2">Connection Problems</h4>
-              <CodeBlock
-                language="bash"
-                code={`# Test MCP server directly
-curl -X GET https://your-app.databricksapps.com/mcp/
-
-# Check app status
-./app_status.sh
-
-# View server logs
-curl https://your-app.databricksapps.com/logz`}
-              />
-            </div>
-
-            <div>
-              <h4 className="font-bold text-slate-900 mb-2">Development Issues</h4>
-              <CodeBlock
-                language="bash"
-                code={`# Restart development server
-./watch.sh
-
-# Run comprehensive tests
-./claude_scripts/test_local_mcp_curl.sh
-./claude_scripts/test_local_mcp_proxy.sh
-
-# Interactive debugging
-./claude_scripts/inspect_local_mcp.sh`}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Next Steps */}
-        <div className="mt-16 p-8 rounded-2xl border-2 border-orange-200 bg-orange-50">
-          <h3 className="text-2xl font-bold text-slate-900 mb-4">🎉 Section Complete!</h3>
-          <p className="text-lg text-slate-700 mb-6">
-            You now have a production-ready custom MCP server that integrates SQL warehouses
-            with AI development workflows. Your tools are available in Cursor IDE,
-            Databricks AI Playground, and any MCP-compatible client.
-          </p>
-
-          <div className="flex flex-wrap gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
             <a
-              href="/local-ide"
-              className="inline-flex items-center gap-2 rounded-lg bg-orange-600 px-6 py-3 text-lg font-bold text-white hover:bg-orange-700 transition-colors"
-            >
-              Next: Local IDE Setup
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-
-            <a
-              href="https://github.com/databricks-solutions/custom-mcp-databricks-app"
+              href="https://github.com/databrickslabs/mcp"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-300 bg-white px-6 py-3 text-lg font-bold text-slate-700 hover:bg-slate-50 transition-colors"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-300 bg-white px-6 py-3 text-base font-bold text-slate-700 hover:bg-slate-50 transition-colors"
             >
-              Template Repository
+              databrickslabs/mcp
               <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
@@ -766,9 +766,21 @@ curl https://your-app.databricksapps.com/logz`}
               href="https://fastmcp.org/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-300 bg-white px-6 py-3 text-lg font-bold text-slate-700 hover:bg-slate-50 transition-colors"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-300 bg-white px-6 py-3 text-base font-bold text-slate-700 hover:bg-slate-50 transition-colors"
             >
               FastMCP Docs
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+
+            <a
+              href="https://modelcontextprotocol.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-300 bg-white px-6 py-3 text-base font-bold text-slate-700 hover:bg-slate-50 transition-colors"
+            >
+              MCP Spec
               <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
