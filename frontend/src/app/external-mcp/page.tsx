@@ -117,8 +117,9 @@ export default function ExternalMcpPage() {
                 language="sql"
                 title="Create GitHub MCP Connection"
                 code={`-- Create HTTP connection for GitHub MCP server
+-- Replace {name_prefix} with your unique identifier (e.g., your username)
 -- Replace <insert_token_here> with your GitHub Personal Access Token
-CREATE CONNECTION github_mcp
+CREATE CONNECTION github_mcp_connection_{name_prefix}
   TYPE HTTP
   OPTIONS (
     host 'https://api.githubcopilot.com',
@@ -133,7 +134,7 @@ CREATE CONNECTION github_mcp
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
                     <span className="text-blue-600 mt-0.5">•</span>
-                    <span>Make sure to set <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">is_mcp_connection</code> to <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">&apos;true&apos;</code> to enable MCP functionality</span>
+                    <span>Replace <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">&#123;name_prefix&#125;</code> with your unique identifier to avoid naming conflicts (e.g., your username)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-blue-600 mt-0.5">•</span>
@@ -141,7 +142,7 @@ CREATE CONNECTION github_mcp
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-blue-600 mt-0.5">•</span>
-                    <span>The connection name can be customized (e.g., <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">github_mcp_myorg</code>)</span>
+                    <span>Make sure to set <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">is_mcp_connection</code> to <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">&apos;true&apos;</code> to enable MCP functionality</span>
                   </li>
                 </ul>
               </InfoBox>
@@ -150,7 +151,7 @@ CREATE CONNECTION github_mcp
             <InfoBox type="success" title="Connection Created!">
               <p>Your external MCP server is now available at:</p>
               <code className="block mt-3 p-3 bg-slate-100 rounded-lg text-slate-800 font-mono text-sm">
-                https://&lt;workspace-hostname&gt;/api/2.0/mcp/external/github_mcp
+                https://&lt;workspace-hostname&gt;/api/2.0/mcp/external/github_mcp_connection_&#123;name_prefix&#125;
               </code>
             </InfoBox>
           </div>
@@ -183,7 +184,7 @@ CREATE CONNECTION github_mcp
                     Click <strong>Tools → + Add tool</strong> and select <strong>MCP Servers</strong>.
                   </p>
                   <p className="text-slate-700 mb-3">
-                    Choose <strong>External MCP servers</strong> and select your connection: <code>github_mcp</code>
+                    Choose <strong>External MCP servers</strong> and select your connection: <code>github_mcp_connection_&#123;name_prefix&#125;</code>
                   </p>
                 </div>
               </div>
