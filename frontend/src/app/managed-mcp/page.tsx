@@ -797,46 +797,6 @@ Common questions users might ask:
           </div>
         </WorkshopStep>
 
-        <WorkshopStep number={5} title="Export and Deploy Your Agent">
-          <div className="space-y-6">
-            <p className="text-lg text-slate-700 leading-relaxed">
-              Once you're satisfied with your agent's behavior in AI Playground, export it for deployment.
-            </p>
-
-            <div className="space-y-4">
-              <div className="border border-slate-200 rounded-lg p-4 bg-slate-50">
-                <h5 className="font-bold text-slate-900 mb-2">Step 1: Export from AI Playground</h5>
-                <p className="text-slate-700 text-sm">
-                  Click <strong>Export</strong> in AI Playground to generate Python notebooks that define and deploy your agent.
-                </p>
-              </div>
-
-              <div className="border border-slate-200 rounded-lg p-4 bg-slate-50">
-                <h5 className="font-bold text-slate-900 mb-2">Step 2: Review Generated Code</h5>
-                <p className="text-slate-700 text-sm">
-                  The exported code creates a LangGraph ChatAgent with your selected tools and deploys it using Mosaic AI Agent Framework.
-                </p>
-              </div>
-
-              <div className="border border-slate-200 rounded-lg p-4 bg-slate-50">
-                <h5 className="font-bold text-slate-900 mb-2">Step 3: Address TODOs</h5>
-                <p className="text-slate-700 text-sm">
-                  Complete any TODO items in the generated notebooks to customize your agent for production use.
-                </p>
-              </div>
-            </div>
-
-            <InfoBox type="tip" title="Deployment Options">
-              <p>Your exported agent can be deployed as:</p>
-              <ul className="mt-3 space-y-1">
-                <li>• <strong>Model serving endpoint</strong> - For REST API access</li>
-                <li>• <strong>Databricks App</strong> - For web interface deployment</li>
-                <li>• <strong>Notebook job</strong> - For batch processing workflows</li>
-              </ul>
-            </InfoBox>
-          </div>
-        </WorkshopStep>
-
         {/* Next Steps */}
         <div className="mt-16 p-8 rounded-2xl border-2 border-sky-200 bg-sky-50">
           <h3 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
