@@ -38,25 +38,19 @@ This creates your workshop catalog and configures authentication.
    cd custom-mcp-template
    ```
 
-2. **Load your workshop configuration:**
-   ```bash
-   source ../.env.local
-   echo "Your participant prefix: $PARTICIPANT_PREFIX"
-   ```
-
-3. **Build the Python wheel:**
+2. **Build the Python wheel:**
    ```bash
    uv build --wheel
    ```
    This packages your MCP server and creates the `.build/` directory with all dependencies.
 
-4. **Deploy to Databricks Apps:**
+3. **Deploy to Databricks Apps:**
    ```bash
-   databricks bundle deploy --var="participant_prefix=$PARTICIPANT_PREFIX"
+   source ../.env.local && databricks bundle deploy
    ```
-   This creates an app named: `mcp-custom-server-<your-prefix>`
+   This automatically uses your participant prefix from setup and creates: `mcp-custom-server-<your-prefix>`
 
-5. **Verify deployment:**
+4. **Verify deployment:**
    ```bash
    databricks apps list | grep mcp-custom-server
    ```
@@ -64,19 +58,20 @@ This creates your workshop catalog and configures authentication.
 ### Important Notes
 
 - **App naming:** The app name MUST start with `mcp-` to appear in the Databricks MCP playground
-- **Unique naming:** Each participant gets a unique app name using their prefix to avoid conflicts
-- **No manual app creation needed:** `databricks bundle deploy` handles everything automatically
-- **Updates:** Just re-run `uv build --wheel` and `databricks bundle deploy` to update your deployed app
+- **Automatic prefix:** The bundle automatically uses your `PARTICIPANT_PREFIX` from `.env.local`
+- **Unique naming:** Each participant gets a unique app name to avoid conflicts in shared workspaces
+- **Updates:** Just re-run `uv build --wheel` and `source ../.env.local && databricks bundle deploy` to update
 
 ### Troubleshooting
 
 **If you see "App does not exist or is deleted" error:**
 ```bash
 # Clear any stale state
-databricks bundle destroy
+rm -rf .databricks
 
 # Then re-deploy
-databricks bundle deploy --var="participant_prefix=$PARTICIPANT_PREFIX"
+uv build --wheel
+source ../.env.local && databricks bundle deploy
 ```
 
 **To check app status:**

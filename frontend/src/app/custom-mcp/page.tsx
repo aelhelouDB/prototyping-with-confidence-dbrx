@@ -248,20 +248,15 @@ INFO:     Started reloader process`}
             <CodeBlock
               language="bash"
               title="Deploy with Databricks Bundle"
-              code={`# Make sure you're authenticated
-databricks auth login --profile your-profile
+              code={`# Navigate to custom-mcp-template directory
+cd custom-mcp-template
 
-# Build the wheel
+# Build and deploy (automatically uses your participant prefix from setup)
 uv build --wheel
-
-# Deploy using bundle
-databricks bundle deploy
-
-# Start the app
-databricks bundle run custom-mcp-server
+source ../.env.local && databricks bundle deploy
 
 # Your app will be available at:
-# https://your-app.databricksapps.com/`}
+# https://<workspace>/apps/mcp-custom-server-<your-prefix>`}
             />
 
             <div className="bg-yellow-50 rounded-xl p-6 border-2 border-yellow-200">
@@ -269,8 +264,9 @@ databricks bundle run custom-mcp-server
               <ol className="space-y-2 text-sm text-slate-700 ml-4">
                 <li>1. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">uv build --wheel</code> packaged your app into a Python wheel</li>
                 <li>2. The build hook (hooks/apps_build.py) created a <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">.build/</code> directory</li>
-                <li>3. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">databricks bundle deploy</code> uploaded it to Databricks</li>
-                <li>4. Your MCP server is now running as a Databricks App!</li>
+                <li>3. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">source ../.env.local</code> loaded your participant prefix</li>
+                <li>4. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">databricks bundle deploy</code> created your app with unique name</li>
+                <li>5. Your MCP server is now running as a Databricks App!</li>
               </ol>
             </div>
 
