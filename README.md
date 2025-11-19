@@ -1,4 +1,4 @@
-# Databricks MCP Workshop
+# Prototyping with Confidence on Databricks
 
 Interactive workshop for learning Databricks Model Context Protocol (MCP) with hands-on examples covering managed servers, external integrations, local IDE setup, and custom server development.
 

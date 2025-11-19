@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **Databricks MCP (Model Context Protocol) Workshop** - an interactive learning environment that demonstrates MCP integration with Databricks. The workshop uses a Next.js frontend served by a Python FastAPI backend and is deployed as a Databricks App using Asset Bundles (DABS).
+This is **Prototyping with Confidence on Databricks** - an interactive learning environment that demonstrates MCP integration with Databricks. The workshop uses a Next.js frontend served by a Python FastAPI backend and is deployed as a Databricks App using Asset Bundles (DABS).
 
 ## Key Architecture
 

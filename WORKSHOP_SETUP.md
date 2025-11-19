@@ -1,6 +1,6 @@
-# 🎓 Databricks MCP Workshop Setup
+# 🎓 Prototyping with Confidence on Databricks - Setup
 
-Welcome to the Databricks Model Context Protocol (MCP) Workshop! This interactive setup will create your personal workshop environment with isolated resources.
+Welcome to Prototyping with Confidence on Databricks! This interactive setup will create your personal workshop environment with isolated resources.
 
 ## 🚀 Quick Start for Participants
 

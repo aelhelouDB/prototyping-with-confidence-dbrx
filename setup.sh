@@ -261,8 +261,8 @@ install_dependencies() {
 # Main setup function
 main() {
     clear
-    echo -e "${PURPLE}🎓 Databricks MCP Workshop Setup${NC}"
-    echo -e "${PURPLE}===================================${NC}"
+    echo -e "${PURPLE}🎓 Prototyping with Confidence on Databricks - Setup${NC}"
+    echo -e "${PURPLE}======================================================${NC}"
     echo ""
     echo "This script will set up your personal workshop environment with:"
     echo "• Your own Unity Catalog with sample data"
@@ -312,7 +312,7 @@ main() {
     if [ "$skip_auth" != "true" ]; then
         # Initialize .env.local file if it doesn't exist
         if [ ! -f ".env.local" ]; then
-            echo "# Databricks MCP Workshop Configuration" > .env.local
+            echo "# Prototyping with Confidence on Databricks - Configuration" > .env.local
             echo "# Generated on $(date)" >> .env.local
             echo "# Participant: $PARTICIPANT_NAME" >> .env.local
             echo "" >> .env.local

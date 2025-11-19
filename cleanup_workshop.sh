@@ -219,8 +219,8 @@ cleanup_specific() {
 # Main function
 main() {
     clear
-    echo -e "${PURPLE}🧹 Databricks MCP Workshop Cleanup${NC}"
-    echo -e "${PURPLE}===================================${NC}"
+    echo -e "${PURPLE}🧹 Prototyping with Confidence on Databricks - Cleanup${NC}"
+    echo -e "${PURPLE}======================================================${NC}"
     echo ""
 
     case "${1:-}" in
