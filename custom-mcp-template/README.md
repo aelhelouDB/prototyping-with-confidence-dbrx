@@ -49,11 +49,18 @@ This creates your workshop catalog and configures authentication.
    unset DATABRICKS_AUTH_TYPE && databricks bundle deploy --var="participant_prefix=<your-prefix>"
    ```
    Replace `<your-prefix>` with your participant prefix (use dashes, not underscores).
-   For example: `unset DATABRICKS_AUTH_TYPE && databricks bundle deploy --var="participant_prefix=amine-elhelo"`
+   For example: `unset DATABRICKS_AUTH_TYPE && databricks bundle deploy --var="participant_prefix=amine-elhelou"`
 
    This creates an app named: `mcp-custom-server-<your-prefix>`
 
-4. **Verify deployment:**
+4. **Start the Databricks Apps:**
+   ```bash
+   unset DATABRICKS_AUTH_TYPE && databricks bundle run custom-mcp-server --var="participant_prefix=<your-prefix>"
+   ```
+   Replace `<your-prefix>` with your participant prefix (use dashes, not underscores).
+   For example: `unset DATABRICKS_AUTH_TYPE && databricks bundle run custom-mcp-server --var="participant_prefix=amine-elhelou"`
+
+5. **Verify deployment:**
    ```bash
    databricks apps list | grep mcp-custom-server
    ```

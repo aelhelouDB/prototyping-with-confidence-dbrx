@@ -300,8 +300,8 @@ unset DATABRICKS_AUTH_TYPE
 CLEAN_PREFIX=$(echo "$PARTICIPANT_PREFIX" | tr '_' '-')
 databricks bundle deploy --var="participant_prefix=$CLEAN_PREFIX"
 
-# 4. Start the app
-databricks apps start "mcp-custom-server-$CLEAN_PREFIX"
+# 4. Start and deploy the app
+databricks bundle run custom-mcp-server --var="participant_prefix=$CLEAN_PREFIX"
 
 # 5. Get the app URL
 databricks apps get "mcp-custom-server-$CLEAN_PREFIX" | grep url`}
@@ -315,7 +315,7 @@ databricks apps get "mcp-custom-server-$CLEAN_PREFIX" | grep url`}
                 <li>2. The build hook created a <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">.build/</code> directory with dependencies</li>
                 <li>3. Your participant prefix was cleaned (underscores → dashes) for app naming</li>
                 <li>4. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">databricks bundle deploy</code> created your app with unique name</li>
-                <li>5. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">databricks apps start</code> started the app compute</li>
+                <li>5. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">databricks bundle run</code> started the app and deployed the code</li>
                 <li>6. Your MCP server is now running 24/7 as a Databricks App!</li>
               </ol>
             </div>
@@ -963,8 +963,8 @@ echo "Deploying as: mcp-custom-server-$CLEAN_PREFIX"
 unset DATABRICKS_AUTH_TYPE
 databricks bundle deploy --var="participant_prefix=$CLEAN_PREFIX"
 
-# 5. Start the app
-databricks apps start "mcp-custom-server-$CLEAN_PREFIX"
+# 5. Start and deploy the app
+databricks bundle run custom-mcp-server --var="participant_prefix=$CLEAN_PREFIX"
 
 # 6. Get the MCP endpoint URL
 databricks apps get "mcp-custom-server-$CLEAN_PREFIX" | grep url`}
@@ -977,7 +977,7 @@ databricks apps get "mcp-custom-server-$CLEAN_PREFIX" | grep url`}
                 <li>1. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">uv build --wheel</code> packages your enhanced MCP server with the new tool</li>
                 <li>2. Your prefix is cleaned (underscores → dashes) to meet Databricks Apps naming requirements</li>
                 <li>3. The bundle deploys to Databricks with your unique app name</li>
-                <li>4. The app is started automatically with <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">databricks apps start</code></li>
+                <li>4. <code className="bg-yellow-100 px-1 py-0.5 rounded text-xs">databricks bundle run</code> starts the app and deploys the code</li>
                 <li>5. Your enhanced MCP server is now live and accessible!</li>
               </ol>
             </div>
