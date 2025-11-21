@@ -7,7 +7,7 @@ Interactive workshop for learning how to build agents on Databricks with hands-o
 **For workshop participants** - Get your own isolated environment with one command:
 
 ```bash
-git clone https://github.com/databricks-solutions/mcp-workshop.git
+git clone https://github.com/aelhelouDB/prototyping-with-confidence-dbrx.git
 cd mcp-workshop
 ./setup.sh
 ```
